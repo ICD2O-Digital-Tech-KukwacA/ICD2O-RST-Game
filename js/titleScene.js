@@ -4,7 +4,7 @@
 // This is the tile scene for the game
 
 /**
- * This class is the splash scene for the game
+ * This class is the title scene for the game
  */
 class TitleScene extends Phaser.Scene {
     constructor() {
