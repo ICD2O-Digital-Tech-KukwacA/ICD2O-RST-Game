@@ -25,7 +25,7 @@ class TitleScene extends Phaser.Scene {
     }
 
     create(data) {
-        this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackground').setScale(2.75);
+        this.titleSceneBackgroundImage = this.add.sprite(0, 0, 'titleSceneBackgroundImage').setScale(2.75);
         this.titleSceneBackgroundImage.x = 1920 / 2
         this.titleSceneBackgroundImage.y = 1080 / 2
         this.titleSceneText = this.add.text(1920 / 2, (1080 / 2) + 350, 'Guardians of the Galaxy', this.titleSceneTextStyle).setOrigin(0.5);
