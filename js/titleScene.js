@@ -31,7 +31,10 @@ class TitleScene extends Phaser.Scene {
         this.titleSceneText = this.add.text(1920 / 2, (1080 / 2) + 350, 'Guardians of the Galaxy', this.titleSceneTextStyle).setOrigin(0.5);
     }
 
-    update (time, delta) { 
+    update(time, delta) {
+        if (time > 10000) {
+            this.scene.switch('menuScene');
+        }
     }
 }
     export default TitleScene
