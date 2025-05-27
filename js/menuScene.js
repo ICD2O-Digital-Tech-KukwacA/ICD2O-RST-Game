@@ -10,7 +10,7 @@ class MenuScene extends Phaser.Scene {
     constructor() {
         super({ key: 'menuScene' });
         this.menuSceneBackgroundImage = null;
-        this.StartButton = null;
+        this.startButton = null;
     }
 
 
