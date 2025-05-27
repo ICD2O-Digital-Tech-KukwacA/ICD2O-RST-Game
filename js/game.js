@@ -1,7 +1,7 @@
 // Copyright (c) 2020 Mr. Coxall All rights reserved
 
 // Created by: Kukwac
-// Created on: May 2020
+// Created on: May 2025
 // This file contains the JS functions for index.html
 /* global Phaser */
 
