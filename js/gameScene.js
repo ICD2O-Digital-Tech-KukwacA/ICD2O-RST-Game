@@ -21,12 +21,12 @@ class GameScene extends Phaser.Scene {
     preload() {
         console.log('Game Scene');
         // Images
-        this.load.image('startBackground', './assets/starBackground.png');
+        this.load.image('starBackground', './assets/starBackground.png');
         this.load.image('ship', './assets/spaceShip.png');
     }
 
     create(data) {
-        this.background = this.add.image(0, 0, 'startBackground').setScale(2.0);
+        this.background = this.add.image(0, 0, 'starBackground').setScale(2.0);
         this.background.setOrigin(0, 0);
         this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship');
     }
@@ -45,7 +45,7 @@ class GameScene extends Phaser.Scene {
         if (keyRightObj.isDown === true) {
             this.ship.x += 20;
             if (this.ship.x > 1920) {
-                this.ship.x = 1920; // Prevent ship from going off the left edge
+                this.ship.x = 1920; // Prevent ship from going off the right edge
             }
         }
     }
