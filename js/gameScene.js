@@ -15,13 +15,13 @@ class GameScene extends Phaser.Scene {
 
 
     init (data) {
-    this.cameras.main.setBackgroundColor("0x5f6e7a");
+    this.cameras.main.setBackgroundColor("#fffdfd");
     }
 
     preload() {
         console.log('Game Scene');
         // Images
-        this.load.image('startBackground', './assets/startBackground.png');
+        this.load.image('startBackground', './assets/starBackground.png');
         this.load.image('ship', './assets/spaceShip.png');
     }
 
