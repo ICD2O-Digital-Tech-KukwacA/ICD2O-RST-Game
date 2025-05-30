@@ -12,6 +12,7 @@ class GameScene extends Phaser.Scene {
         
         this.background = null;
         this.ship = null;
+        this.fireMissile = false;
     }
 
 
@@ -21,9 +22,12 @@ class GameScene extends Phaser.Scene {
 
     preload() {
         console.log('Game Scene');
-        // Images
+        // Image files
         this.load.image('starBackground', './assets/starBackground.png');
         this.load.image('ship', './assets/spaceShip.png');
+        this.load.image('missile', './assets/missile.png');
+        // Sound files
+        this.load.audio('laser', './assets/laser1.wav');
     }
 
     create(data) {
@@ -31,12 +35,16 @@ class GameScene extends Phaser.Scene {
         this.background.setOrigin(0, 0);
         
         this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship');
+
+        // Creates a group for missiles
+        this.missileGroup = this.physics.add.group();
     }
 
     update(time, delta) { 
         const keyLeftObj = this.input.keyboard.addKey('LEFT');
         const keyRightObj = this.input.keyboard.addKey('RIGHT');
-        
+        const keySpaceObj = this.input.keyboard.addKey('SPACE');
+
         if (keyLeftObj.isDown === true) {
             this.ship.x = this.ship.x - 20;
             if (this.ship.x < 0) {
@@ -50,6 +58,26 @@ class GameScene extends Phaser.Scene {
                 this.ship.x = 1920; // Prevent ship from going off the right edge
             }
         }
+
+        if (keySpaceObj.isDown === true) {
+            if (this.fireMissile === false) {
+                // fire missile
+                this.fireMissile = true;
+                const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile');
+                this.missileGroup.add(aNewMissile);
+                this.sound.play('laser'); // Play laser sound
+            }
+        }
+        if (keySpaceObj.isUp === true) {
+            this.fireMissile = false; // Reset fireMissile when space is released
+        }
+
+        this.missileGroup.children.each(function (item) {
+            item.y = item.y - 20; // Move missile up
+            if (item.y < 0) {
+                item.destroy(); // Destroy missile if it goes off the top of the screen
+            }  
+        });
     }
 }
     export default GameScene
