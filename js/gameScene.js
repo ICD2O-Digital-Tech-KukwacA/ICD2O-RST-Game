@@ -7,6 +7,18 @@
  * This class is the game scene for the game
  */
 class GameScene extends Phaser.Scene {
+    
+    //Create an alien
+    createAlien() {
+        const alienXLocation = Math.floor(Math.random() * 1920) + 1;
+        let alienXVelocity = Math.floor(Math.random() * 50) + 1; // Random speed between 50 and 150
+        alienXVelocity *= Math.random(Math.random()) ? 1 : -1; // Randomly set direction to left or right
+        const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien');
+        anAlien.body.velocity.y = 335; // Set the alien's speed
+        anAlien.body.velocity.x = alienXVelocity; // Set the alien's horizontal speed
+        this.alienGroup.add(anAlien);
+    }
+
     constructor() {
         super({ key: 'gameScene' });
         
@@ -26,8 +38,10 @@ class GameScene extends Phaser.Scene {
         this.load.image('starBackground', './assets/starBackground.png');
         this.load.image('ship', './assets/spaceShip.png');
         this.load.image('missile', './assets/missile.png');
+        this.load.image('alien', './assets/alien.png');
         // Sound files
         this.load.audio('laser', './assets/laser1.wav');
+        this.load.audio('explosion', './assets/barrelExploding.wav');
     }
 
     create(data) {
@@ -38,6 +52,20 @@ class GameScene extends Phaser.Scene {
 
         // Creates a group for missiles
         this.missileGroup = this.physics.add.group();
+
+        // Creates a group for aliens
+        this.alienGroup = this.add.group();
+        this.createAlien();
+
+        // Set up collision detection between missiles and aliens
+        this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
+            alienCollide.destroy(); // Destroy the alien
+            missileCollide.destroy(); // Destroy the missile
+            this.sound.play('explosion'); // Play explosion sound on collision
+            // Create a new alien
+            this.createAlien(); 
+            this.createAlien();
+        }.bind(this));
     }
 
     update(time, delta) { 
