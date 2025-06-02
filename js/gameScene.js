@@ -11,10 +11,10 @@ class GameScene extends Phaser.Scene {
     //Create an alien
     createAlien() {
         const alienXLocation = Math.floor(Math.random() * 1920) + 1;
-        let alienXVelocity = Math.floor(Math.random() * 50) + 1; // Random speed between 50 and 150
+        let alienXVelocity = Math.floor(Math.random() * 50) + 1; // Random speed between 50 and 1
         alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // Randomly set direction to left or right
         const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien');
-        anAlien.body.velocity.y = 235; // Set the alien's speed
+        anAlien.body.velocity.y = 200; // Set the alien's speed
         anAlien.body.velocity.x = alienXVelocity; // Set the alien's horizontal speed
         this.alienGroup.add(anAlien);
     }
@@ -25,6 +25,11 @@ class GameScene extends Phaser.Scene {
         this.background = null;
         this.ship = null;
         this.fireMissile = false;
+        this.score = 0;
+        this.scoreText = null;
+        this.scoreTextStyle = { font: '65px Arial', fill: '#fde4b9', align: 'center' };
+        this.gameOverText = null;
+        this.gameOverTextStyle = { font: '65px Arial', fill: '#ff0000', align: 'center' };
     }
 
 
@@ -47,6 +52,8 @@ class GameScene extends Phaser.Scene {
     create(data) {
         this.background = this.add.image(0, 0, 'starBackground').setScale(2.0);
         this.background.setOrigin(0, 0);
+
+        this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle);
         
         this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship');
 
@@ -58,13 +65,27 @@ class GameScene extends Phaser.Scene {
         this.createAlien();
 
         // Set up collision detection between missiles and aliens
-        this.physics.add.collider(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
+        this.physics.add.overlap(this.missileGroup, this.alienGroup, function (missileCollide, alienCollide) {
             alienCollide.destroy(); // Destroy the alien
             missileCollide.destroy(); // Destroy the missile
             this.sound.play('explosion'); // Play explosion sound on collision
+            this.score = this.score +1; // Increase score by 1
+            this.scoreText.setText('Score: ' + this.score.toString()); // Update score text
             // Create a new alien
             this.createAlien(); 
             this.createAlien();
+        }.bind(this));
+
+        // Set up collision detection between missiles and aliens
+        this.physics.add.overlap(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
+            this.sound.play('bomb'); // Play explosion sound on collision
+            this.physics.pause(); // Pause the game
+            alienCollide.destroy(); // Destroy the alien
+            shipCollide.destroy(); // Destroy the missile
+            // Restart the game when clicked
+            this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5);
+            this.gameOverText.setInteractive({ useHandCursor: true });
+            this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'));
         }.bind(this));
     }
 
