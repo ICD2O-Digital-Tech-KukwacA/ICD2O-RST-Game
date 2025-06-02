@@ -12,9 +12,9 @@ class GameScene extends Phaser.Scene {
     createAlien() {
         const alienXLocation = Math.floor(Math.random() * 1920) + 1;
         let alienXVelocity = Math.floor(Math.random() * 50) + 1; // Random speed between 50 and 150
-        alienXVelocity *= Math.random(Math.random()) ? 1 : -1; // Randomly set direction to left or right
+        alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // Randomly set direction to left or right
         const anAlien = this.physics.add.sprite(alienXLocation, -100, 'alien');
-        anAlien.body.velocity.y = 335; // Set the alien's speed
+        anAlien.body.velocity.y = 235; // Set the alien's speed
         anAlien.body.velocity.x = alienXVelocity; // Set the alien's horizontal speed
         this.alienGroup.add(anAlien);
     }
