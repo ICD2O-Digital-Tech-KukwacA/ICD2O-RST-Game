@@ -55,7 +55,8 @@ class GameScene extends Phaser.Scene {
         this.background.setOrigin(0, 0);
 
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle);
-        
+        this.score = 0;
+
         this.ship = this.physics.add.sprite(1920 / 2, 1080 - 100, 'ship');
 
         // Creates a group for missiles
