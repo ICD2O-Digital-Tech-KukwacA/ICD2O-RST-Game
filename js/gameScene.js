@@ -58,7 +58,7 @@ class GameScene extends Phaser.Scene {
         this.fireMissile = false; // Reset fireMissile to false at the start of the game
         this.isGameOver = false; // Reset isGameOver to false at the start of the game
         this.score = 0;
-        this.background = this.add.image(0, 0, 'newBackgroundImage').setScale(2.0);
+        this.background = this.add.image(0, 0, 'newBackgroundImage').setScale(5.0);
         this.background.setOrigin(0, 0);
 
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle);
