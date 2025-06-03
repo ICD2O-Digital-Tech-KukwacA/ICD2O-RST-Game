@@ -40,13 +40,13 @@ class GameScene extends Phaser.Scene {
     preload() {
         console.log('Game Scene');
         // Image files
-        this.load.image('starBackground', './assets/starBackground.png');
-        this.load.image('ship', './assets/spaceShip.png');
+        this.load.image('starBackground', './assets/newBackGroundImage.png');
+        this.load.image('ship', './assets/spaceShipWhite.png');
         this.load.image('missile', './assets/missile.png');
-        this.load.image('alien', './assets/alien.png');
+        this.load.image('alien', './assets/alienShipCartoon.png');
         // Sound files
-        this.load.audio('laser', './assets/laser1.wav');
-        this.load.audio('explosion', './assets/barrelExploding.wav');
+        this.load.audio('laser', './assets/laserShot.wav');
+        this.load.audio('explosion', './assets/collisionSound2.wav');
     }
 
     create(data) {
@@ -76,9 +76,9 @@ class GameScene extends Phaser.Scene {
             this.createAlien();
         }.bind(this));
 
-        // Set up collision detection between missiles and aliens
+        // Set up collision detection between space ship and aliens
         this.physics.add.overlap(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
-            this.sound.play('bomb'); // Play explosion sound on collision
+            this.sound.play('collisionSound'); // Play explosion sound on collision
             this.physics.pause(); // Pause the game
             alienCollide.destroy(); // Destroy the alien
             shipCollide.destroy(); // Destroy the missile
