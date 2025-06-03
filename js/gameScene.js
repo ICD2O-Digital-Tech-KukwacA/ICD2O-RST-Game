@@ -1,4 +1,4 @@
-/* global phaser */
+/* global Phaser */
 // Created by: Kukwac
 // Created on: May 2025
 // This is the game scene for the game
@@ -47,6 +47,7 @@ class GameScene extends Phaser.Scene {
         // Sound files
         this.load.audio('laser', './assets/laserShot.wav');
         this.load.audio('explosion', './assets/collisionSound2.wav');
+        this.load.audio('gameOver', './assets/collisionSound.wav');
     }
 
     create(data) {
@@ -78,7 +79,7 @@ class GameScene extends Phaser.Scene {
 
         // Set up collision detection between space ship and aliens
         this.physics.add.overlap(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
-            this.sound.play('collisionSound'); // Play explosion sound on collision
+            this.sound.play('gameOver'); // Play explosion sound on collision
             this.physics.pause(); // Pause the game
             alienCollide.destroy(); // Destroy the alien
             shipCollide.destroy(); // Destroy the missile
