@@ -88,7 +88,7 @@ class GameScene extends Phaser.Scene {
         // Set up collision detection between space ship and aliens
         this.physics.add.overlap(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
             this.sound.play('gameOver'); // Play explosion sound on collision
-            this.physics.pause(); // Pause the game
+            // this.physics.pause(); // Pause the game
             alienCollide.destroy(); // Destroy the alien
             shipCollide.destroy(); // Destroy the missile
             // Restart the game when clicked
