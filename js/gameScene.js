@@ -25,6 +25,7 @@ class GameScene extends Phaser.Scene {
         this.background = null;
         this.ship = null;
         this.fireMissile = false;
+        this.isGameOver = false; // Flag to check if the game is over
         this.score = 0;
         this.scoreText = null;
         this.scoreTextStyle = { font: '65px Arial', fill: '#fde4b9', align: 'center' };
@@ -88,6 +89,7 @@ class GameScene extends Phaser.Scene {
             alienCollide.destroy(); // Destroy the alien
             shipCollide.destroy(); // Destroy the missile
             // Restart the game when clicked
+            this.isGameOver = true; // Set game over flag to true
             this.gameOverText = this.add.text(1920 / 2, 1080 / 2, 'Game Over!\nClick to play again.', this.gameOverTextStyle).setOrigin(0.5);
             this.gameOverText.setInteractive({ useHandCursor: true });
             this.gameOverText.on('pointerdown', () => this.scene.start('gameScene'));
@@ -118,7 +120,7 @@ class GameScene extends Phaser.Scene {
         }
 
         if (keySpaceObj.isDown === true) {
-            if (this.fireMissile === false) {
+            if (this.fireMissile === false &&! this.isGameOver) {
                 // fire missile
                 this.fireMissile = true;
                 const aNewMissile = this.physics.add.sprite(this.ship.x, this.ship.y, 'missile');
