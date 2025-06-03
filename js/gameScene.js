@@ -10,6 +10,8 @@ class GameScene extends Phaser.Scene {
     
     //Create an alien
     createAlien() {
+        // Only a new alien if there are fewer than 25 aliens
+        if (this.alienGroup.countActive(true) <= 25) {
         const alienXLocation = Math.floor(Math.random() * 1920) + 1;
         let alienXVelocity = Math.floor(Math.random() * 50) + 1; // Random speed between 50 and 1
         alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // Randomly set direction to left or right
@@ -17,6 +19,7 @@ class GameScene extends Phaser.Scene {
         anAlien.body.velocity.y = 200; // Set the alien's speed
         anAlien.body.velocity.x = alienXVelocity; // Set the alien's horizontal speed
         this.alienGroup.add(anAlien);
+        }
     }
 
     constructor() {
@@ -41,7 +44,7 @@ class GameScene extends Phaser.Scene {
     preload() {
         console.log('Game Scene');
         // Image files
-        this.load.image('newBackgroundImage', './assets/newBackGroundImage.png');
+        this.load.image('newBackgroundImage', './assets/newBackgroundImage.png');
         this.load.image('ship', './assets/spaceShipWhite.png');
         this.load.image('missile', './assets/missile.png');
         this.load.image('alien', './assets/alienShipCartoon.png');
