@@ -107,6 +107,8 @@ class GameScene extends Phaser.Scene {
         const keyLeftObj = this.input.keyboard.addKey('LEFT');
         const keyRightObj = this.input.keyboard.addKey('RIGHT');
         const keySpaceObj = this.input.keyboard.addKey('SPACE');
+        const keyUpObj = this.input.keyboard.addKey('UP');
+        const keyDownObj = this.input.keyboard.addKey('DOWN');
 
         if (keyLeftObj.isDown === true) {
             this.ship.x = this.ship.x - 20;
@@ -119,6 +121,18 @@ class GameScene extends Phaser.Scene {
             this.ship.x = this.ship.x + 20;
             if (this.ship.x > 1920) {
                 this.ship.x = 1920; // Prevent ship from going off the right edge
+            }
+        }
+        if (keyUpObj.isDown === true) {
+            this.ship.y = this.ship.y - 20;
+            if (this.ship.y < 0) {
+                this.ship.y = 0; // Prevent ship from going off the top edge
+            }
+        }
+        if (keyDownObj.isDown === true) {
+            this.ship.y = this.ship.y + 20;
+            if (this.ship.y > 1080) {
+                this.ship.y = 1080; // Prevent ship from going off the bottom edge
             }
         }
 
