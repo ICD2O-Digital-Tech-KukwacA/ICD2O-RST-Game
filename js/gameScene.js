@@ -11,7 +11,7 @@ class GameScene extends Phaser.Scene {
     //Create an alien
     createAlien() {
         // Only a new alien if there are fewer than 25 aliens
-        if (this.alienGroup.countActive(true) <= 10) {
+        if (this.alienGroup.countActive(true) >= 10) {
         const alienXLocation = Math.floor(Math.random() * 1920) + 1;
         let alienXVelocity = Math.floor(Math.random() * 50) + 1; // Random speed between 50 and 1
         alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // Randomly set direction to left or right
@@ -88,7 +88,7 @@ class GameScene extends Phaser.Scene {
         // Set up collision detection between space ship and aliens
         this.physics.add.overlap(this.ship, this.alienGroup, function (shipCollide, alienCollide) {
             this.sound.play('gameOver'); // Play explosion sound on collision
-            // this.physics.pause(); // Pause the game
+            this.physics.pause(); // Pause the game
             alienCollide.destroy(); // Destroy the alien
             shipCollide.destroy(); // Destroy the missile
             // Restart the game when clicked
