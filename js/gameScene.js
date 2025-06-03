@@ -95,6 +95,10 @@ class GameScene extends Phaser.Scene {
     }
 
     update(time, delta) { 
+        if (this.isGameOver) {
+            return; // Stop updating if the game is over
+        }
+
         const keyLeftObj = this.input.keyboard.addKey('LEFT');
         const keyRightObj = this.input.keyboard.addKey('RIGHT');
         const keySpaceObj = this.input.keyboard.addKey('SPACE');
