@@ -40,7 +40,7 @@ class GameScene extends Phaser.Scene {
     preload() {
         console.log('Game Scene');
         // Image files
-        this.load.image('starBackground', './assets/newBackGroundImage.png');
+        this.load.image('newBackgroundImage', './assets/newBackGroundImage.png');
         this.load.image('ship', './assets/spaceShipWhite.png');
         this.load.image('missile', './assets/missile.png');
         this.load.image('alien', './assets/alienShipCartoon.png');
@@ -51,7 +51,7 @@ class GameScene extends Phaser.Scene {
     }
 
     create(data) {
-        this.background = this.add.image(0, 0, 'starBackground').setScale(2.0);
+        this.background = this.add.image(0, 0, 'newBackgroundImage').setScale(2.0);
         this.background.setOrigin(0, 0);
 
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle);
