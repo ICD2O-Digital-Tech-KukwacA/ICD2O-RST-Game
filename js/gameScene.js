@@ -44,7 +44,7 @@ class GameScene extends Phaser.Scene {
     preload() {
         console.log('Game Scene');
         // Image files
-        this.load.image('newBackgroundImage', './assets/newBackgroundImage.png');
+        this.load.image('starBackground', './assets/starBackground.png');
         this.load.image('ship', './assets/spaceShipWhite.png');
         this.load.image('missile', './assets/missile.png');
         this.load.image('alien', './assets/alienShipCartoon.png');
@@ -58,7 +58,7 @@ class GameScene extends Phaser.Scene {
         this.fireMissile = false; // Reset fireMissile to false at the start of the game
         this.isGameOver = false; // Reset isGameOver to false at the start of the game
         this.score = 0;
-        this.background = this.add.image(0, 0, 'newBackgroundImage').setScale(10.0);
+        this.background = this.add.image(0, 0, 'starBackground').setScale(2.0);
         this.background.setOrigin(0, 0);
 
         this.scoreText = this.add.text(10, 10, 'Score: ' + this.score.toString(), this.scoreTextStyle);
