@@ -83,6 +83,7 @@ class GameScene extends Phaser.Scene {
             // Create a new alien
             this.createAlien(); 
             this.createAlien();
+            this.createAlien();
         }.bind(this));
 
         // Set up collision detection between space ship and aliens
