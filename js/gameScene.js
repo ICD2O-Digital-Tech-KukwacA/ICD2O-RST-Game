@@ -10,8 +10,8 @@ class GameScene extends Phaser.Scene {
     
     //Create an alien
     createAlien() {
-        // Only a new alien if there are fewer than 25 aliens
-        if (this.alienGroup.countActive(true) <= 25) {
+        // Only a new alien if there are fewer than 15 aliens
+        if (this.alienGroup.countActive(true) < 15) {
         const alienXLocation = Math.floor(Math.random() * 1920) + 1;
         let alienXVelocity = Math.floor(Math.random() * 50) + 1; // Random speed between 50 and 1
         alienXVelocity *= Math.round(Math.random()) ? 1 : -1; // Randomly set direction to left or right
